@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tust.yh.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.tust.yh.entity.Menu">
+    <id column="MENU_ID" jdbcType="DECIMAL" property="menuId" />
+    <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+    <result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="TARGET" jdbcType="DECIMAL" property="target" />
+    <result column="SORT" jdbcType="DECIMAL" property="sort" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+    <result column="HOME_PAGE_NAME" jdbcType="VARCHAR" property="homePageName" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TB_POSTAGE_MENU
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.tust.yh.entity.Menu">
+    insert into TB_POSTAGE_MENU (MENU_ID, MENU_NAME, PARENT_ID, 
+      STATUS, TYPE, URL, 
+      TARGET, SORT, REMARK, 
+      ICON, HOME_PAGE_NAME)
+    values (#{menuId,jdbcType=DECIMAL}, #{menuName,jdbcType=VARCHAR}, #{parentId,jdbcType=DECIMAL}, 
+      #{status,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, #{url,jdbcType=VARCHAR}, 
+      #{target,jdbcType=DECIMAL}, #{sort,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{homePageName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tust.yh.entity.Menu">
+    update TB_POSTAGE_MENU
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      URL = #{url,jdbcType=VARCHAR},
+      TARGET = #{target,jdbcType=DECIMAL},
+      SORT = #{sort,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
+      HOME_PAGE_NAME = #{homePageName,jdbcType=VARCHAR}
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select MENU_ID, MENU_NAME, PARENT_ID, STATUS, TYPE, URL, TARGET, SORT, REMARK, ICON, 
+    HOME_PAGE_NAME
+    from TB_POSTAGE_MENU
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MENU_ID, MENU_NAME, PARENT_ID, STATUS, TYPE, URL, TARGET, SORT, REMARK, ICON, 
+    HOME_PAGE_NAME
+    from TB_POSTAGE_MENU
+  </select>
+</mapper>
